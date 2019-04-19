@@ -1,0 +1,187 @@
+<!--VERSION 2 WITH CSS, introduction to responsive design, resize per device, then attempt interactive links (enabled)
+WILL ALSO load detailPage.html, with url param handling built in
+grab a set of images, using an array, for-iteration, then style them using css,
+move to second page using url parameters, non jq
+use non jq method to pass url parameters
+width of div, https://css-tricks.com/almanac/properties/w/width/
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+  
+        <title>Example 1</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="go.css">
+        <style>
+      
+       </style>
+    
+        <title>DIY RESPONSIVE GRID</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="go.css">
+    
+</head>
+<body>
+  
+  <script>
+  var urlimages = ["https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/1.jpg",
+                    "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/2.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/3.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/4ae86.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/5delta.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/6e30m3.jpg",]; 
+  console.log(urlimages);
+  var titles = ["Woody Style Civic Wagon",
+                "Rust Free Civic Wagon",
+                "Baby Blue Civic Hatch",
+                "Corolla GT Hatch","Lancia Delta Evo III",
+                "BMW E30 M3"];
+  var descriptions = ["Staton wagon civic good to go. Museum quality. Rare woody wagon grahpics.", 
+                    "Stock civic wagon. Grandma Driven. Minimal Rust.",
+                    "Original civic hatch. Rare blue color. Aftermarket zebra seats.", 
+                    "UK spec ae86 levin hatch. No rust, garage keep. 18,000 no low ballers.",
+                    "1990 lancia delta evo III. Orginal paint and wheels. Never seen snow.",
+                    "1990 bmw e30 m3 evo spec. Orginal paint and grahics. 22,000 miles."];
+
+  
+  var imgContainer = document.createElement("div");
+  imgContainer.setAttribute("class", "containMe");
+  document.body.appendChild(imgContainer);
+  
+  
+  for(var i=0; i < urlimages.length; i++) {
+    console.log("image in iteration is " + urlimages[i]);
+   
+    url = urlimages[i];
+    caption = titles[i];
+    description = descriptions[i];
+    urlOfDetailPage = "detailPage-v3.html?" + "img=" + url + "&value1=" + caption + "&value2=" +description;
+    
+    var imgDiv = document.createElement("div"); //make a div
+    imgDiv.setAttribute("class", "box"); 
+    
+    var imgInDiv = document.createElement("img");
+    imgInDiv.setAttribute("class", "pctImg"); //fit to div
+    imgInDiv.setAttribute("src", url);
+   
+    var d = document.createElement("div");
+	  var b = document.createElement("button");
+	  b.setAttribute("class", "button");
+    var buttonText = document.createTextNode("Make Favorite");
+	  b.appendChild(buttonText);
+      (function(){
+        var x = i;
+        b.addEventListener("click", function(){setCookie("car_"+x, url, 30);});
+      })()
+    d.appendChild(b); //add the button to the div
+    imgDiv.appendChild(d);
+    //var favPicture = document.getElementById("car_"+x);
+     //if ()
+    
+    var b2 = document.createElement("button");
+	  b2.setAttribute("class", "button");
+    var buttonText2 = document.createTextNode("Unfavorite");
+	  b2.appendChild(buttonText2);
+    (function(){
+        var y = i;
+        b2.addEventListener("click", function(){deleteCookie("car_"+y);});
+      })()
+	  d.appendChild(b2); //add the button to the div
+    imgDiv.appendChild(d);
+  
+    var t = document.createTextNode(titles[i]); //start page titles
+    console.log(t);
+    imgDiv.appendChild(t);
+   
+    var link = document.createElement("a");
+    link.setAttribute("href", urlOfDetailPage); // so you'll navigate to the url
+    link.appendChild(imgInDiv); //make the image the link
+    imgDiv.appendChild(link);//place the link inside of each div
+    imgContainer.appendChild(imgDiv);//then appd to body, document.body.appendChild  
+  }
+ 
+  function setCookie(cimage,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cimage+"="+cvalue+"; "+expires;
+    getCookie();
+  }
+    
+  function getCookie(cimage) {
+    var image = cimage + "=";
+    var ca = document.cookie.split(';');
+      for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(image) == 0) {
+          return c.substring(image.length, c.length);
+          } 
+        }
+      
+    return "";
+  }
+  
+  function checkCookie() {
+    var user=getCookie("favorite");
+    if (user != "") {
+      alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:","");
+        if (user != "" && user != null) {
+          setCookie("favorite", user, 30);
+        }
+      }
+  }
+
+  
+  function changeButton() {
+    var name = 'user_read_the_page' + '=';
+	  var ca = document.cookie.split(';');
+	  for(var i=0; i<ca.length; i++) {
+		  var c = ca[i];
+      while(c.charAt(0)==' ') {
+			  c = c.substring(1);
+		  }
+      if(c.indexOf(name) != -1) {
+			  var output = c.substring(name.length,c.length);
+		  }
+	  }       
+    if(output == 1) {
+		  cookie_exists = 1;
+	  } else {
+		  cookie_exists = 0;
+	  }           
+    if(cookie_exists == 1) {
+		  document.getElementById("read_button").style.backgroundColor = "green";
+		  document.getElementById("read_button").style.color = "white";
+		  document.getElementById("read_button").style.fontWeight = "bold";
+		  document.getElementById("read_button").innerText = "\u2714 You Have Read This Page";
+	  } else {
+		  document.getElementById("read_button").style.backgroundColor = "red";
+		  document.getElementById("read_button").style.color = "white";
+		  document.getElementById("read_button").style.fontWeight = "bold";
+		  document.getElementById("read_button").innerText = "\u2718 Please Read This Page";              
+	  }
+    return "";
+  }
+
+  function deleteCookie( cimage ) {
+    document.cookie = cimage + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  </script>
+
+
+</body>
+</html>
