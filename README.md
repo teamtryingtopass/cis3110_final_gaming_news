@@ -1,3 +1,3 @@
 # CIS3110 Final Repo
 
-### Team: Paul, Russell, Fernando, Lawrence
+### Team Members: Paul, Russell, Fernando, Lawrence
