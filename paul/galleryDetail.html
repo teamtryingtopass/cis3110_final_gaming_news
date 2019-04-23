@@ -1,125 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Paul Lee - Phase 2 Image Detail</title>
+  <title>Paul Lee - Image Detail</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
     .heading {
       color: blue;
     }
 
-    .pctImg{
-    width: 100%;
-    height: auto;
+    .pctImg {
+      width: 100%;
+      height: auto;
     }
-    
-    .imgDiv{
-      width: 30%; 
+
+    .imgDiv {
+      width: 30%;
       height: 300px;
-      padding: 5px; 
+      padding: 5px;
     }
-
   </style>
-</head>
-<body>
-  <h1>Paul Lee - Phase 2 Image Detail</h1>
-    <h3>Let's load some url parameters</h3>
-    <p id="status"></p>
-   URL parameter #1: <input id="k" type="text" /><br />
-  <div>
-        <p id="output">
-        </p>
-    </div>
-
-    <script>
-    var url = window.location.href;
-    console.log("url = " + url);
-    var x = breakUpURLParameters(url);
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script>
+    $(document).ready(function () {
+      var url = window.location.href;
+      console.log("url = " + url);
+      var x = breakUpURLParameters(url);
       console.log(x.search);
-      console.log("img url  = " + x.search.img); //please refer to http://www.w3schools.com/jsref/jsref_map.asp for example code
+      console.log("img url  = " + x.search
+        .img); //please refer to http://www.w3schools.com/jsref/jsref_map.asp for example code
 
 
-    document.getElementById("k").value = x.search.img;//assign your url parameter to be placeholder for your query boxes, to show off
-    document.getElementById("output").innerHTML = "total url was " +  url;
-    var t = document.getElementById("output");
-    var y = document.createElement("img");
-    y.setAttribute("src", x.search.img); // set up and assign img src
-    y.setAttribute("class", "pctImg"); //uses css class, be sure it's in the head area
+      document.getElementById("k").value = x.search
+        .img; //assign your url parameter to be placeholder for your query boxes, to show off
+      document.getElementById("output").innerHTML = "total url was " + url;
+      var t = document.getElementById("output");
+      var y = document.createElement("img");
+      y.setAttribute("src", x.search.img); // set up and assign img src
+      y.setAttribute("class", "pctImg"); //uses css class, be sure it's in the head area
+      y.setAttribute('style', 'width: 70%;')
+      // var title = x.search.title;
+      // var description = x.search.description;
 
-    // var title = x.search.title;
-    // var description = x.search.description;
+      var title = x.search.title.replace(/%20/gi, ' ');
+      var description = x.search.description.replace(/%20/gi, ' ');
 
-    var title = x.search.title.replace(/%20/gi, ' ');
-    var description = x.search.description.replace(/%20/gi, ' ');
- 
+      console.log('title: ' + title);
+      console.log('description: ' + description);
 
-    
-
-    console.log('title: ' + title);
-    console.log('description: ' + description);
-
-    var h2 = document.createElement("h2");
-    var p = document.createElement("p");
-
-    var h2Text = document.createTextNode(title);
-    var pText = document.createTextNode(description);
-
-    h2.appendChild(h2Text);
-    p.appendChild(pText);
-
-    t.appendChild(h2);
-    t.appendChild(p);
-    t.appendChild(y);//attach to output para
+      var h2 = document.createElement("h2");
+      var p = document.createElement("p");
+      var h2Text = document.createTextNode(title);
+      var pText = document.createTextNode(description);
 
 
-    function breakUpURLParameters(url) {        //analyze and output the url parameters as a useful array to caller
-        //  create a link in the DOM and set its href
-        var link = document.createElement('a');
-        link.setAttribute('href', url);
-        console.log("path variable is " + url);
 
-        //  return an easy-to-use object that breaks apart the path
-        return {
-            host:     link.hostname,  //  'example.com'
-            port:     link.port,      //  12345
-            search:   mapMaker(link.search),  //  {startIndex: 1, pageSize: 10}
-            path:     link.pathname,  //  '/blog/foo/bar'
-            protocol: link.protocol   //  'http:'
-        }
+      h2.appendChild(h2Text);
+      p.appendChild(pText);
+
+      t.appendChild(h2);
+      t.appendChild(p);
+
+      if (x.search.favorited) {
+        var div1 = document.createElement('div');
+        var span1 = document.createElement('span');
+        var span1text = document.createTextNode('favorited');
+        span1.setAttribute('class','badge badge-pill badge-success');
+        span1.appendChild(span1text);
+
+        var span2 = document.createElement('span');
+        var span2text = document.createTextNode('favorited');
+        span2.setAttribute('class','badge badge-pill badge-success');
+        span2.appendChild(span2text);
+
+        var span3 = document.createElement('span');
+        var span3text = document.createTextNode('favorited');
+        span3.setAttribute('class','badge badge-pill badge-success');
+        span3.appendChild(span3text);
+
+        div1.appendChild(span1);
+        div1.appendChild(span2);
+        div1.appendChild(span3);
+
+        t.appendChild(div1);
+      }
+
+      t.appendChild(y); //attach to output para
+    });
+
+    function breakUpURLParameters(url) { //analyze and output the url parameters as a useful array to caller
+      //  create a link in the DOM and set its href
+      var link = document.createElement('a');
+      link.setAttribute('href', url);
+      console.log("path variable is " + url);
+
+      //  return an easy-to-use object that breaks apart the path
+      return {
+        host: link.hostname, //  'example.com'
+        port: link.port, //  12345
+        search: mapMaker(link.search), //  {startIndex: 1, pageSize: 10}
+        path: link.pathname, //  '/blog/foo/bar'
+        protocol: link.protocol //  'http:'
+      }
     }
-
     /**
      *  Convert search param string into an object or array
      *  '?startIndex=1&pageSize=10' -> {startIndex: 1, pageSize: 10}
      */
     function mapMaker(search, preserveDuplicates) {
-        //  option to preserve duplicate keys (e.g. 'sort=name&sort=age')
-        preserveDuplicates = preserveDuplicates || false;  //  disabled by default
+      //  option to preserve duplicate keys (e.g. 'sort=name&sort=age')
+      preserveDuplicates = preserveDuplicates || false; //  disabled by default
 
-        var outputNoDupes = {};
-        var returnableArray = [];  //  optional output array to preserve duplicate keys
+      var outputNoDupes = {};
+      var returnableArray = []; //  optional output array to preserve duplicate keys
 
-        //  sanity check
-        if(!search) throw new Error('mapMaker: your search input param is misformed?');
+      //  sanity check
+      if (!search) throw new Error('mapMaker: your search input param is misformed?');
 
-        //  remove ? character from your url (?foo=1&bar=2 -> 'foo=1&bar=2')
-        search = search.split('?')[1];
+      //  remove ? character from your url (?foo=1&bar=2 -> 'foo=1&bar=2')
+      search = search.split('?')[1];
 
-        //  split apart your keys into a useful array of key/value pairs ('foo=1&bar=2' -> ['foo=1', 'bar=2'])
-        search = search.split('&');
+      //  split apart your keys into a useful array of key/value pairs ('foo=1&bar=2' -> ['foo=1', 'bar=2'])
+      search = search.split('&');
 
-        //  separate keys from values (['foo=1', 'bar=2'] -> [{foo:1}, {bar:2}])
-        //  then package as an array for your caller to use as variables
-        returnableArray = search.map(function(keyval){
-                                     var out = {};
-                                     keyval = keyval.split('=');
-                                     out[keyval[0]] = keyval[1];
-                                     outputNoDupes[keyval[0]] = keyval[1]; //  might as well do the no-dupe work too while we're in the loop
-                                     return out;
-                                     });
+      //  separate keys from values (['foo=1', 'bar=2'] -> [{foo:1}, {bar:2}])
+      //  then package as an array for your caller to use as variables
+      returnableArray = search.map(function (keyval) {
+        var out = {};
+        keyval = keyval.split('=');
+        out[keyval[0]] = keyval[1];
+        outputNoDupes[keyval[0]] = keyval[1]; //  might as well do the no-dupe work too while we're in the loop
+        return out;
+      });
 
-                                     return (preserveDuplicates) ? returnableArray : outputNoDupes;
+      return (preserveDuplicates) ? returnableArray : outputNoDupes;
     }
+  </script>
+</head>
 
-</script>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Img Detail</span>
+  </nav>
+  <div class='container'>
+    <h1>Paul Lee - Image Detail</h1>
+    <div class='jumbotron'>
+      <p id="status"></p>
+      URL parameter #1: <input id="k" type="text" /><br />
+      <p id="output"></p>
+    </div>
+  </div>
 </body>
+
 </html>
