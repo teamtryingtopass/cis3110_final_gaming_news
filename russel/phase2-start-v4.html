@@ -1,0 +1,186 @@
+<!--VERSION 2 WITH CSS, introduction to responsive design, resize per device, then attempt interactive links (enabled)
+WILL ALSO load detailPage.html, with url param handling built in
+grab a set of images, using an array, for-iteration, then style them using css,
+move to second page using url parameters, non jq
+use non jq method to pass url parameters
+width of div, https://css-tricks.com/almanac/properties/w/width/
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Example 1</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="go.css">
+       
+</head>
+<body>
+    <div style="position: relative; height:30px; width: auto;"> 
+    <div style="position: absolute; top: 0; right: 0; width: 100px; text-align:right;">
+      Login
+    </div>
+    <div style="position: absolute; bottom: 0; right: 0px; width: 100px; text-align:right;">
+    
+    </div>
+    
+  </div>
+
+
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Jumbo Sales</h1>
+
+      <h2>Front Page <span class="badge badge-secondary">New</span></h2>
+      
+      <p class="lead">Automotive Selection</p>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://s3.us-east-2.amazonaws.com/fedriusphase1/index.html">Paul</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+  var urlimages = ["https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/1.jpg",
+                    "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/2.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/3.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/4ae86.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/5delta.jpg",
+                  "https://s3-us-west-2.amazonaws.com/3110spring/Phase+2/6e30m3.jpg",]; 
+  console.log(urlimages);
+  var titles = ["Woody Style Civic Wagon",
+                "Rust Free Civic Wagon",
+                "Baby Blue Civic Hatch",
+                "Corolla GT Hatch","Lancia Delta Evo III",
+                "BMW E30 M3"];
+  var descriptions = ["Staton wagon civic good to go. Museum quality. Rare woody wagon grahpics.", 
+                    "Stock civic wagon. Grandma Driven. Minimal Rust.",
+                    "Original civic hatch. Rare blue color. Aftermarket zebra seats.", 
+                    "UK spec ae86 levin hatch. No rust, garage keep. 18,000 no low ballers.",
+                    "1990 lancia delta evo III. Orginal paint and wheels. Never seen snow.",
+                    "1990 bmw e30 m3 evo spec. Orginal paint and grahics. 22,000 miles."];
+  
+  var imgContainer = document.createElement("div");
+  imgContainer.setAttribute("class", "containMe");
+  document.body.appendChild(imgContainer);
+
+  for(var i=0; i < urlimages.length; i++) {
+    console.log("image in iteration is " + urlimages[i]);
+   
+    url = urlimages[i];
+    caption = titles[i];
+    description = descriptions[i];
+    urlOfDetailPage = "detailPage-v3.html?" + "img=" + url + "&value1=" + caption + "&value2=" +description
+    
+    var imgDiv = document.createElement("div"); //make a div
+    imgDiv.setAttribute("class", "box"); 
+    
+    var imgInDiv = document.createElement("img");
+    imgInDiv.setAttribute("class", "pctImg"); //fit to div
+    imgInDiv.setAttribute("src", url);
+   
+    var d = document.createElement("div");
+	  var b = document.createElement("button");
+	  b.setAttribute("class", "button");
+    var buttonText = document.createTextNode("Make Favorite");
+	  b.appendChild(buttonText);
+      (function(){
+        var x = i;
+        b.addEventListener("click", function(){setCookie("car_"+x, url, 30);});
+        var cookie = getCookie('car_' + x);
+        if (cookie === '') {
+          d.appendChild(b); //add the button to the div
+        } else {
+            buttonText.parentNode.removeChild(buttonText);
+            var favPic = document.createElement("img");
+            favPic.src = "baseline_stars_black_18dp.png";
+            favPic.type = "image";
+            favPic.setAttribute("class", "favPic");
+          
+            urlOfDetailPage = "detailPage-v3.html?" + "img=" + url + "&value1=" + caption + "&value2=" + description + "&value3=" + favPic
+
+            var link = document.createElement("a");
+            link.setAttribute("href", urlOfDetailPage); // so you'll navigate to the url
+            link.appendChild(favPic); //make the image the link
+            imgDiv.appendChild(link);//place the link inside of each div
+          
+            b.appendChild(link);
+            b.setAttribute("class", "favButton");
+          }
+        })()
+    d.appendChild(b); //add the button to the div
+    imgDiv.appendChild(d);
+    
+    var b2 = document.createElement("button");
+	  b2.setAttribute("class", "button");
+    var buttonText2 = document.createTextNode("Unfavorite");
+	  b2.appendChild(buttonText2);
+    (function(){
+        var y = i;
+        b2.addEventListener("click", function(){deleteCookie("car_"+y);});
+      })()
+	  d.appendChild(b2); //add the button to the div
+    imgDiv.appendChild(d);
+  
+    var t = document.createTextNode(titles[i]); //start page titles
+    console.log(t);
+    imgDiv.appendChild(t);
+   
+    var link = document.createElement("a");
+    link.setAttribute("href", urlOfDetailPage); // so you'll navigate to the url
+    link.appendChild(imgInDiv); //make the image the link
+    imgDiv.appendChild(link);//place the link inside of each div
+    imgContainer.appendChild(imgDiv);//then appd to body, document.body.appendChild  
+  }
+ 
+  function setCookie(cimage,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cimage+"="+cvalue+"; "+expires;
+  }
+    
+  function getCookie(cimage) {
+    var image = cimage + "=";
+    var ca = document.cookie.split(';');
+      for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(image) == 0) {
+          return c.substring(image.length, c.length);
+          } 
+      }
+      
+      return "";
+  }
+
+  function deleteCookie( cimage ) {
+    document.cookie = cimage + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
+  
+  </script>
+
+
+</body>
+</html>

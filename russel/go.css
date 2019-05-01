@@ -1,0 +1,77 @@
+.pctImg{
+width: 100%;
+height: auto;
+}
+
+.imgDiv{
+  width:30%
+  height: 300px;
+  padding: 5px; 
+  font-size: 50px;
+}
+body {
+    margin: 10px;
+}
+.containMe {
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: 33% 33% 33%; //better for responsivity
+}
+ 
+.login {
+  background-color: rgb(196, 191, 190);
+  color: black;
+  width: 10%;
+  height: 10%;
+}
+
+.box {
+  background-color: rgb(196, 191, 190);
+  color: black;
+  border-radius: 3px; //adjust
+  padding: 20px;
+  font-size: 150%; //adjust
+  margin: 3px;
+  border: 3px;
+  width: 100%;
+  height: auto;
+}
+
+.titles {
+  font-size: 150%;  
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.favPic {
+  width: 80%;
+  height: 80%;
+  padding: 1px 1px; 
+}
+
+  .favButton {
+    background-color: #4CAF50;
+    width: auto;
+    height: auto;
+    padding: 1px 1px; 
+  }
+
+  .favDetail {
+    width: 5%;
+    height: 5%;
+    padding: 5px 5px;
+    margin: 4px 2px;
+    align-content: left
+  }
+  
