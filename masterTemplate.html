@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Master Template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    .heading {
+      color: blue;
+    }
+
+    .pctImg {
+      width: 100%;
+      height: auto;
+    }
+
+    .imgDiv {
+      padding: 5px;
+    }
+
+    .gridContainer {
+      display: grid;
+      grid-gap: 3px;
+      grid-template-columns: 33% 33% 33%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script>
+    $(document).ready(function () {
+      var images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"];
+      var titles = ['Oldy car 1', 'Old car 2', 'Old car 3', 'Old car 4', 'Old civic 5', 'old civic 6'];
+      var descriptions = ['This looks like an old car. Its brown!',
+        'This is an old car number 2',
+        'This is the third old car',
+        'This is the 4th olde car',
+        'This is old car number 5',
+        'This is the last old civic car number 6'
+      ];
+      var url;
+      var urlOfDetailPage;
+      var title;
+      var description;
+
+      for (var i = 0; i < images.length; i++) {
+        var h2 = document.createElement("h2");
+        var p = document.createElement("p");
+
+        var h2Text = document.createTextNode(titles[i]);
+        var pText = document.createTextNode(descriptions[i]);
+
+        h2.appendChild(h2Text);
+        p.appendChild(pText);
+
+        //console.log("image in iteration is " + images[i]);
+
+        url = 'https://s3.amazonaws.com/fedphase2gallery/' + images[i];
+        title = '&title=' + titles[i];
+        description = '&description=' + descriptions[i];
+
+        // prod
+        urlOfDetailPage = "https://s3.amazonaws.com/fedphase2gallery/galleryDetail.html?" + "img=" + url + title + description;
+        // dev
+        // urlOfDetailPage = "./galleryDetail.html?" + "img=" + url + title + description;
+
+        var imgDiv = document.createElement("div");
+        imgDiv.setAttribute("class", "imgDiv card");
+
+        var imgInDiv = document.createElement("img");
+        imgInDiv.setAttribute("class", "pctImg");
+        imgInDiv.setAttribute("src", url);
+        var link = document.createElement("a");
+     
+
+        var btn1 = document.createElement("button");
+        btn1.setAttribute("class", "btn btn-primary");
+        var btn2 = document.createElement("button");
+        btn2.setAttribute("class", "btn btn-danger");
+
+ 
+        var btnText1 = document.createTextNode('Make Favorite');
+        var btnText2 = document.createTextNode('Unfavorite');
+
+        btn1.appendChild(btnText1);
+        btn2.appendChild(btnText2);
+        imgDiv.appendChild(h2);
+        imgDiv.appendChild(p);
+
+        var theCookie = getCookie('car_' + i);
+        if (theCookie) {
+          var div1 = document.createElement('div');
+          div1.setAttribute('style','display: flex; justify-content: center; padding: 5px 0 5px 0');
+          var span1 = document.createElement('span');
+          var span1text = document.createTextNode('favorited');
+          span1.setAttribute('class','badge badge-pill badge-success');
+          span1.appendChild(span1text);
+
+          var span2 = document.createElement('span');
+          var span2text = document.createTextNode('favorited');
+          span2.setAttribute('class','badge badge-pill badge-success');
+          span2.appendChild(span2text);
+
+          var span3 = document.createElement('span');
+          var span3text = document.createTextNode('favorited');
+          span3.setAttribute('class','badge badge-pill badge-success');
+          span3.appendChild(span3text);
+
+          div1.appendChild(span1);
+          div1.appendChild(span2);
+          div1.appendChild(span3);
+          
+          imgDiv.appendChild(div1)
+          urlOfDetailPage = urlOfDetailPage + '&favorited=true';
+        } else {
+          imgDiv.appendChild(btn1);
+        }
+        link.setAttribute("href", urlOfDetailPage);
+        link.appendChild(imgInDiv);
+        imgDiv.appendChild(link);
+        imgDiv.appendChild(btn2);
+        document.getElementsByClassName('gridContainer')[0].appendChild(imgDiv);
+
+        (function () {
+          var x = i;
+          btn1.addEventListener('click', function () {
+            setCookie("car_" + x, url, 30);
+            urlOfDetailPage = urlOfDetailPage + '&favorited=true';
+            window.location.href = urlOfDetailPage;
+          });
+
+          btn2.addEventListener('click', function () {
+            deleteCookie("car_" + x);
+          });
+        })()
+      }
+    });
+
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toGMTString();
+      document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkCookie() {
+      var user = getCookie("username");
+      if (user != "") {
+        alert("Welcome again " + user);
+      } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+          setCookie("username", user, 30);
+        }
+      }
+    }
+
+    function deleteCookie(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Simple Nav</span>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">More complex Nav</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="heading"> BOOTSTRAP TEMPLATE 1</h1>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Jumbotron!</h1>
+        <p class="lead"></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h3>Example Cards</h3>
+  </div>
+  <div style='display: flex;' class='container'>
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h3>This is the grid container - with Bootstrap button and card</h3>
+    <div class='gridContainer' style='border: 1px solid black;'></div>
+  </div>
+</body>
+
+</html>
