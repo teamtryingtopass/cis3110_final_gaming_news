@@ -1,4 +1,5 @@
 # CIS3110 Final Repo
+# PXNP Gaming News
 
 ### Team Members: Paul, Russell, Fernando, Lawrence
 
