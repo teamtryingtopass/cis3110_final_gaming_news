@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>PXNP Gaming News</title>
+  <style>
+    html {
+      background: url(https://s3.amazonaws.com/fedphase2gallery/background.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    .stopit {
+      background-color: transparent
+    }
+
+    .loginContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .loginMain {
+      background-color: gainsboro;
+      width: 300px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .shadow1 {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body class='stopit'>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow1">
+        <a class="navbar-brand" href="https://s3.amazonaws.com/fedphase2gallery/home.html"
+          style='font-weight: bold'>PXNP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+7/phase2-start-v4.html">PS4</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://s3.amazonaws.com/fedphase2gallery/xboxHome.html">XBOX</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">NINTENDO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/Phase6.html">PC</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                MORE INFO
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item"
+                  href="https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/nowGoHere.htm">TERMS OF USE</a>
+                <a class="dropdown-item"
+                  href="https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/ContactUs.html">CONTACT US</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class='navbar-nav'>
+            <li class="nav-item dropdown btn-primary btn">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                ACCOUNT
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item"
+                  href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+6/profile_page.html">Profile</a>
+                <a class="dropdown-item"
+                  href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+6/account_management.html">Settings</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <div class='container'>
+    <div id="root"></div>
+    <div class='loginContainer'>
+      <div class='loginMain shadow1'>
+        <h2>Login</h2>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <button type="button" class="btn btn-primary" id='login'>Login</button>
+          <button type="button" class="btn btn-primary" id='guest'>Continue as Guest</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- REACT -->
+  <script type="text/babel">
+    class App extends React.Component {
+        render() {
+          return (
+            <div className='jumbotron'>
+              <h1 style={{textAlign: 'center'}}>Welcome to PXNP Gaming News</h1>
+            </div>
+          )
+        }
+      }
+    ReactDOM.render(<App />, document.getElementById('root'))
+  </script>
+  <script>
+    $('#login').click(function() {
+      window.location.href = 'https://s3.amazonaws.com/fedphase2gallery/home.html'
+    })
+
+    $('#guest').click(function() {
+      window.location.href = 'https://s3.amazonaws.com/fedphase2gallery/home.html'
+    })
+  </script>
+</body>
+
+</html>
