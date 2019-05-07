@@ -7,4 +7,4 @@ Nintendo -https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/Ninte
 Zelda-https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/Zelda.html
 Splatoon2-https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/Splatoon2.html
 Super-https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/Super.html
-Terms of Use-
+Terms of Use-https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/nowGoHere.htm
