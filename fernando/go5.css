@@ -1,0 +1,48 @@
+.pctImg{
+width: 100%;
+height: auto;
+}
+.imgDiv{
+  width:30%
+  height:300px;
+<<<<<<< HEAD
+  padding:5px;
+=======
+  padding:10px;
+}
+body {
+  margin: 10px;
+}
+.containMe {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 33% 33% 33%; //better for responsivity
+}
+
+.box {
+  background-color: #B60D05;
+  color: #060100;
+  border-radius: 3px; //adjust
+  padding: 20px;
+  font-size: 90%; //adjust
+  margin: 6px;
+  border: 6px;
+
+
+}
+img. background-image{
+  min-height:100%;
+  min-width:1024px;
+  width:100%;
+  height:auto;
+  position:fixed;
+  top:0;
+  left:0;
+
+}
+media screen and (max-width:1024px){
+  img.bg{
+    left:50%
+    margin-left:-512px;
+  }
+}

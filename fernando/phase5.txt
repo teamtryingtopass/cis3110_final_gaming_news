@@ -1,0 +1,6 @@
+*terms of Use
+
+have the logo of the brand on the home page where it will direct them to a page where there will be 3 games 
+
+css. for the different text words make sure to 
+use breadcrumb**

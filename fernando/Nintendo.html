@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+    body  {
+      background-image: url("Logo.jpg");
+      height: 700px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    </style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <title>Nintendo Switch</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="go5.css">
+</head>
+
+ <body>
+
+   <audio controls>
+   <source src=Nin.mp3 type="audio/mpeg">
+   </audio>
+
+<div class="containMe" id="x">
+
+
+
+
+
+
+<script>
+var images =["Splat.png","Wild.jpg","Smash.jpg"]
+console.log(images);
+var title= ["Splatoon2", "Legend of Zelda Breath of the Wild", "Super Smash Bros Ultimate"]
+var html=["Splat.html","Zelda.html","Super.html"]
+var comment=["1","2","3"]
+
+var urlOfDetailPage;
+      for(var i=0; i < images.length; i++) //establish for, 6 items, last index place is 5, if you recall
+       {
+         console.log("image in iteration is " + images[i]);
+         url = "https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/phase5/" + images[i]; //append to https://s3-us-west-2.amazonaws.com/newbucket3110fall18/phase2/
+urlOfDetailPage = html[i] + "img=" + url + "&title=" + title[i] + "&comment=" + comment[i];
+
+           var m = document.getElementById("x"); //containMe
+           var box = document.createElement("div");
+           box.setAttribute("class", "box")
+           var imgIn = document.createElement("img");
+           //var url= "https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/phase5/" + images[i];
+           imgIn.setAttribute("class", "pctImg");
+           imgIn.setAttribute("title", title[i]);
+           imgIn.setAttribute("src", url;
+           var button =document.createElement("button")
+           var label = "fav" + i;
+
+           button.setAttribute("id", label); //uniquely ids each button
+
+           var but3 = document.createTextNode("Favorite");
+
+           var p = document.createElement("p");
+           var p2 = document.createElement("p");
+           var ptext =document.createTextNode(title[i]);
+           var ptext2 = document.createTextNode(comment[i]);
+           p.appendChild(ptext);
+           p2.appendChild(ptext2);
+           button.appendChild(but3);
+           var link = document.createElement("a")
+           link.setAttribute("href", urlOfDetailPage);
+           link.appendChild(imgIn);
+           box.appendChild(link);
+
+           box.append(button);
+           box.appendChild(p);
+           box.appendChild(p2);
+           m.appendChild(box);
+
+       }
+    </script>
+
+
+</body>
+
+</html>
