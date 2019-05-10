@@ -10,6 +10,10 @@ body {
   padding: 1em;
 }
 
+.button {
+  background-color: #e7e7e7; color: black;}
+}
+
 .image {
   width: 100%;
 }
@@ -21,6 +25,10 @@ body {
   padding:5px;
 }
 
+.jumbotron {
+  background-color: violet;
+}
+
 .grid {
   display: grid;
   grid-gap: 3px;
@@ -28,8 +36,8 @@ body {
 }
 
 .box {
-  background-color: #E1D85C;
-  color: #0D1B72;
+  background-color: #07164C;
+  color: #FFFFFF;
   border-radius: 2px;
   padding: 15px;
   margin: 2px;
