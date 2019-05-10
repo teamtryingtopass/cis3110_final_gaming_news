@@ -1,0 +1,192 @@
+  <!--VERSION 2 WITH CSS, introduction to responsive design, resize per device, then attempt interactive links (enabled)
+WILL ALSO load detailPage.html, with url param handling built in
+grab a set of images, using an array, for-iteration, then style them using css,
+move to second page using url parameters, non jq
+use non jq method to pass url parameters
+width of div, https:
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title> PC Gaming </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="goi.css">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow1">
+    <a class="navbar-brand" href="https://s3.amazonaws.com/fedphase2gallery/home.html"
+      style='font-weight: bold'>PXNP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+7/phase2-start-v4.html">PS4</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://s3.amazonaws.com/fedphase2gallery/xboxHome.html">XBOX</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/Nintendo.html">NINTENDO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/Phase6.html">PC</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            MORE INFO
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item"
+              href="https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/nowGoHere.htm">TERMS OF USE</a>
+            <a class="dropdown-item"
+              href="https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/ContactUs.html">CONTACT US</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul class='navbar-nav'>
+        <li class="nav-item dropdown btn-primary btn">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            ACCOUNT
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item"
+              href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+6/profile_page.html">Profile</a>
+            <a class="dropdown-item"
+              href="https://s3-us-west-2.amazonaws.com/3110spring/Phase+6/account_management.html">Settings</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  </head>
+  <body>
+
+    <div class="jumbotron jumbotron-fluid" style="background-color: violet">
+      <div class="container">
+        <h1 class="display-4"> <strong>Top Gaming News</strong> </h1>
+        <p class="lead"> Read about the top gaming news today </p>
+    <div>
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="55.jpg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="GTX.jpg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="razer.jpg" class="d-block w-100">
+    </div>
+  </div>
+  </div>
+  </div>
+      </div>
+   </div>
+    <div id="main" class="grid" style="background-color:black"></div>
+    <script>
+      var main = document.getElementById("main");
+      var images = ["MH.jpg", "OWL.jpg", "stea.png", "PAD.jpg", "heart.jpg", "sc2.jpg"]; //your urls
+      var imagenames = ["Monster Hunter: " , "Overwatch: " , "Steam: " , "Puzzles and Dragons: " , "Hearthstone: " , "Starcraft 2: " ];
+      var captions = ["Monster Hunter World DLC launches today!", "San Francisco Shock leads 28-0", "Steam updates terms of service to address problems", "Puzzles and Dragons copy cats appear in the Hong Kong app market",
+                      "Hearthstone sales plummet as interest in the game declines", "Starcraft 2 newest commander changes"];
+      console.log(images);
+
+      var favorite = getCookie("favorite");
+
+      for(var i = 0; i < images.length; i++)
+      {
+        var imageUrl = "https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/" + images[i];
+        var detailUrl = "detailPage-v4.html?" + "img=" + imageUrl + "&imagenames=" + imagenames[i] + "&captions=" + captions[i]; //where you will navigate, once you press the image, will send the detail page the img to analyze
+
+        var box = document.createElement("div");
+        var link = document.createElement("a");
+        var img = document.createElement("img");
+        var r = document.createElement("p");
+        var a1;
+        var a2 = document.createElement("button");
+        box.className = "box";
+        r.innerHTML = captions[i];
+        img.className = "image";
+        img.src = imageUrl;
+
+        if(favorite != images[i]) {
+
+          a1 = document.createElement("button");
+
+          a1.innerHTML = "Favorite";
+          a1.setAttribute("onclick", "setCookie('favorite', '" + images[i] + "')");
+        }
+        else {
+          a1 = document.createElement("img");
+
+          a1.className = "favoriteIcon";
+          a1.src = "https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/fav.png";
+
+          detailUrl += "&favorite";
+        }
+
+        a2.innerHTML = "Unfavorite";
+        a2.onclick = function()
+        {
+          setCookie("favorite", "");
+        };
+
+        link.href = detailUrl;
+
+        link.appendChild(img);
+        box.appendChild(link);
+        box.appendChild(r);
+        box.appendChild(a1);
+        box.appendChild(a2);
+
+
+        main.appendChild(box);
+      }
+
+      function makeFavorite(imageName)
+      {
+        setCookie("favorite", imageName);
+      }
+
+      function setCookie(cname, cvalue)
+      {
+        var d = new Date();
+
+        d.setTime(d.getTime() + (24*60*60*1000));
+
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+
+        for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+
+        return "";
+      }
+
+    </script>
+
+  </body>
+</html>
