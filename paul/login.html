@@ -33,6 +33,20 @@
     .shadow1 {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     }
+
+    #wee {
+      background-color: #262831;
+      opacity: .9;
+      color: white;
+      border-radius: 15px;
+    }
+    #wee2 {
+      background-color: #262831;
+      opacity: .9;
+      color: white;
+      border-radius: 10px;
+      border: 1px solid white;
+    }
   </style>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -79,7 +93,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item"
-                  href="https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/nowGoHere.htm">TERMS OF USE</a>
+                  href="https://s3-us-west-2.amazonaws.com/newbucket3110fmhuitron/Phase5/nowGoHere.html">TERMS OF USE</a>
                 <a class="dropdown-item"
                   href="https://s3-us-west-2.amazonaws.com/laurence3110spring/Phase+6/ContactUs.html">CONTACT US</a>
               </div>
@@ -106,7 +120,7 @@
   <div class='container'>
     <div id="root"></div>
     <div class='loginContainer'>
-      <div class='loginMain shadow1'>
+      <div class='loginMain shadow1' id='wee2'>
         <h2>Login</h2>
         <form>
           <div class="form-group">
@@ -129,7 +143,7 @@
     class App extends React.Component {
         render() {
           return (
-            <div className='jumbotron'>
+            <div className='jumbotron' id='wee'>
               <h1 style={{textAlign: 'center'}}>Welcome to PXNP Gaming News</h1>
             </div>
           )
